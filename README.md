@@ -39,6 +39,18 @@ Those features are available just with a few lines of code!
 📐 Output image size  
 And many more...
 
+🖌 Some code has customized by INSU BYEON
+
+## UI Color Customization
+```swift
+self.config.colors.rightBarButtonItemColor = .white // Navigation Right Bar Button text color
+self.config.colors.bottomMenuItemBackgroundColor = .black // Bottom TabBar Background view color
+self.config.colors.bottomMenuItemSelectedTextColor = .white // Bottom TabBar selected text color
+self.config.colors.bottomMenuItemUnselectedTextColor = .gray // Bottom TabBar unselected text color
+self.config.colors.libraryMaxNumberWarningViewBackgroundColor = .black // Bottom Warning View Background color when select over max limit count
+self.config.colors.libraryMaxNumberWarningLabelTextColor = .white // Bottom Warning View Text color when select over max limit count
+```
+
 ## Installation
 
 Drop in the Classes folder to your Xcode project.  
