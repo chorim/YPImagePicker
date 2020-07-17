@@ -44,7 +44,7 @@ public class YPSelectionsGalleryVC: UIViewController, YPSelectionsGalleryCellDel
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(done))
-        navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.tintColor
+        navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.rightBarButtonItemColor
         
         YPHelper.changeBackButtonIcon(self)
         YPHelper.changeBackButtonTitle(self)

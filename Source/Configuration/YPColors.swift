@@ -70,4 +70,7 @@ public struct YPColors {
     public var progressBarTrackColor: UIColor = .ypSystemBackground
     /// The color of completed track for the progress bar
     public var progressBarCompletedColor: UIColor?
+    
+    // MARK: - Navigation bar button
+    public var rightBarButtonItemColor: UIColor = .ypSystemBlue
 }
