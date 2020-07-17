@@ -73,4 +73,9 @@ public struct YPColors {
     
     // MARK: - Navigation bar button
     public var rightBarButtonItemColor: UIColor = .ypSystemBlue
+    
+    // MARK: - Library view
+    
+    public var libraryMaxNumberWarningViewBackgroundColor: UIColor = .ypSecondarySystemBackground
+    public var libraryMaxNumberWarningLabelTextColor: UIColor = .black
 }
