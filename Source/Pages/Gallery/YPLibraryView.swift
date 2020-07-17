@@ -63,8 +63,9 @@ final class YPLibraryView: UIView {
         }
         
         // Style
-        maxNumberWarningView.backgroundColor = .ypSecondarySystemBackground
+        maxNumberWarningView.backgroundColor = YPConfig.colors.libraryMaxNumberWarningViewBackgroundColor
         maxNumberWarningLabel.font = UIFont(name: "Helvetica Neue", size: 14)
+        maxNumberWarningLabel.textColor = YPConfig.colors.libraryMaxNumberWarningLabelTextColor
         maxNumberWarningView.isHidden = true
     }
     
