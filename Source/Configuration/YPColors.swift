@@ -50,6 +50,9 @@ public struct YPColors {
     /// A color for for bottom buttons not selected text.
     public var bottomMenuItemUnselectedTextColor: UIColor = .ypSecondaryLabel
 
+    /// A color for bottom menu background color.
+    public var bottomMenuBackgroundColor: UIColor = .clear
+    
     // MARK: - Trimmer
     
     /// The color of the main border of the view
