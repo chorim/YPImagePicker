@@ -280,7 +280,6 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
             
             // Disable Next Button until minNumberOfItems is reached.
             navigationItem.rightBarButtonItem?.isEnabled = libraryVC!.selection.count >= YPConfig.library.minNumberOfItems
-
         case .camera:
             navigationItem.titleView = nil
             title = cameraVC?.title
@@ -369,5 +368,14 @@ extension YPPickerVC: YPLibraryViewDelegate {
         self.dismiss(animated: true) {
             self.imagePickerDelegate?.noPhotos()
         }
+    }
+    
+    public func setRightBarButton(_ button: UIButton) {
+        let buttonView = UIView(frame: .init(x: 0, y: 0, width: 56, height: 56))
+        button.addTarget(self, action: #selector(done), for: .touchUpInside)
+        buttonView.addSubview(button)
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: buttonView)
+        navigationItem.rightBarButtonItem?.isEnabled = libraryVC!.selection.count >= YPConfig.library.minNumberOfItems
     }
 }
