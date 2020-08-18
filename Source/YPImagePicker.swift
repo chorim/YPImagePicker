@@ -38,7 +38,7 @@ open class YPImagePicker: UINavigationController {
     }
     
     let loadingView = YPLoadingView()
-    private let picker: YPPickerVC!
+    public let picker: YPPickerVC!
     
     /// Get a YPImagePicker instance with the default configuration.
     public convenience init() {
