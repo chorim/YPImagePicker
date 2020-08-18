@@ -38,7 +38,7 @@ open class YPImagePicker: UINavigationController {
     }
     
     let loadingView = YPLoadingView()
-    public let picker: YPPickerVC!
+    private let picker: YPPickerVC!
     
     /// Get a YPImagePicker instance with the default configuration.
     public convenience init() {
@@ -157,6 +157,10 @@ override open func viewDidLoad() {
         )
         loadingView.fillContainer()
         loadingView.alpha = 0
+    }
+    
+    public func setRightBarButton(button: UIButton) {
+        picker.setRightBarButton(button)
     }
 }
 
