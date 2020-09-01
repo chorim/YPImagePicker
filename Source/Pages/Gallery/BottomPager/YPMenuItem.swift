@@ -51,9 +51,11 @@ final class YPMenuItem: UIView {
 
     func select() {
         textLabel.textColor = YPConfig.colors.bottomMenuItemSelectedTextColor
+        self.backgroundColor = YPConfig.colors.bottomMenuItemSelectedBackgroundColor
     }
     
     func deselect() {
         textLabel.textColor = YPConfig.colors.bottomMenuItemUnselectedTextColor
+        self.backgroundColor = YPConfig.colors.bottomMenuItemUnselectedBackgroundColor
     }
 }

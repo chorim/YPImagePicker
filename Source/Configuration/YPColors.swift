@@ -47,6 +47,9 @@ public struct YPColors {
     /// A color for for bottom buttons selected text.
     public var bottomMenuItemSelectedTextColor: UIColor = .ypLabel
 
+    public var bottomMenuItemSelectedBackgroundColor: UIColor = .systemGray
+    public var bottomMenuItemUnselectedBackgroundColor: UIColor = .systemGray
+    
     /// A color for for bottom buttons not selected text.
     public var bottomMenuItemUnselectedTextColor: UIColor = .ypSecondaryLabel
 
