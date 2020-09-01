@@ -28,7 +28,6 @@ final class YPLibraryView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.collectionView.backgroundColor = .black
         sv(
             line
         )

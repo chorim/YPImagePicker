@@ -79,17 +79,30 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
         
         // Setup of Navigation Bar
         title = YPConfig.wordings.filter
-        if isFromSelectionVC {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.cancel,
-                                                               style: .plain,
-                                                               target: self,
-                                                               action: #selector(cancel))
+        
+        if YPConfig.icons.useCustomNavigationButton {
+            self.setupLeftBarButton()
+            self.setupRightBarButton()
+        } else {
+            // Left Bar
+            if isFromSelectionVC {
+                navigationItem.leftBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.cancel,
+                                                                   style: .plain,
+                                                                   target: self,
+                                                                   action: #selector(cancel))
+            }
+            YPHelper.changeBackButtonIcon(self)
+            YPHelper.changeBackButtonTitle(self)
+            
+            // Right Bar
+            let rightBarButtonTitle = isFromSelectionVC ? YPConfig.wordings.done : YPConfig.wordings.next
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightBarButtonTitle,
+                                                                style: .done,
+                                                                target: self,
+                                                                action: #selector(save))
+            navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.rightBarButtonItemColor
         }
-        setupRightBarButton()
-        
-        YPHelper.changeBackButtonIcon(self)
-        YPHelper.changeBackButtonTitle(self)
-        
+                
         // Touch preview to see original image.
         let touchDownGR = UILongPressGestureRecognizer(target: self,
                                                        action: #selector(handleTouchDown))
@@ -102,14 +115,25 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     // MARK: Setup - ⚙️
     
     fileprivate func setupRightBarButton() {
-        let rightBarButtonTitle = isFromSelectionVC ? YPConfig.wordings.done : YPConfig.wordings.next
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightBarButtonTitle,
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(save))
-        navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.rightBarButtonItemColor
+        let buttonView = UIView(frame: .init(x: 0, y: 0, width: 46, height: 56))
+        let nextButton = UIButton(frame: .init(x: 0, y: 0, width: 48, height: 26))
+        nextButton.clipsToBounds = false
+        nextButton.setImage(YPConfig.icons.nextButtonIcon, for: .normal)
+        nextButton.imageEdgeInsets = YPConfig.icons.nextButtonIconImageEdges
+        nextButton.addTarget(self, action: #selector(save), for: .touchUpInside)
+        buttonView.addSubview(nextButton)
+        navigationItem.rightBarButtonItem = .init(customView: buttonView)
     }
     
+    fileprivate func setupLeftBarButton() {
+        let backButton = UIButton(frame: CGRect(x: -20, y: -10, width: 20, height: 40))
+        backButton.setImage(YPConfig.icons.backButtonIcon, for: .normal)
+        backButton.contentMode = .left
+        backButton.imageEdgeInsets = YPConfig.icons.backButtonIconImageEdges
+        let backButtonItem = UIBarButtonItem(customView: backButton)
+        backButton.addTarget(self, action: #selector(customCancel), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = backButtonItem
+    }
     // MARK: - Methods 🏓
 
     @objc
@@ -141,6 +165,11 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     @objc
     func cancel() {
         didCancel?()
+    }
+    
+    @objc
+    func customCancel() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc

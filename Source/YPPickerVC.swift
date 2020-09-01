@@ -264,19 +264,32 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
     }
     
     func updateUI() {
+        
         // Update Nav Bar state.
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.cancel,
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(close))
+        
+        if YPConfig.icons.useCustomNavigationButton {
+            self.setupLeftBarButton()
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.cancel,
+                                                               style: .plain,
+                                                               target: self,
+                                                               action: #selector(close))
+        }
+        
         switch mode {
         case .library:
             setTitleViewWithTitle(aTitle: libraryVC?.title ?? "")
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.next,
-                                                                style: .done,
-                                                                target: self,
-                                                                action: #selector(done))
-            navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.rightBarButtonItemColor
+            
+            if YPConfig.icons.useCustomNavigationButton {
+                self.setupRightBarButton()
+            } else {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.next,
+                                                                    style: .done,
+                                                                    target: self,
+                                                                    action: #selector(done))
+                navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.rightBarButtonItemColor
+            }
+            
             
             // Disable Next Button until minNumberOfItems is reached.
             navigationItem.rightBarButtonItem?.isEnabled = libraryVC!.selection.count >= YPConfig.library.minNumberOfItems
@@ -289,6 +302,30 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
             title = videoVC?.title
             navigationItem.rightBarButtonItem = nil
         }
+    }
+    
+    // MARK: Setup - ⚙️
+    
+    fileprivate func setupRightBarButton() {
+        let buttonView = UIView(frame: .init(x: 0, y: 0, width: 46, height: 56))
+        let nextButton = UIButton(frame: .init(x: 0, y: 0, width: 48, height: 26))
+        nextButton.clipsToBounds = false
+        nextButton.setImage(YPConfig.icons.nextButtonIcon, for: .normal)
+        nextButton.imageEdgeInsets = YPConfig.icons.nextButtonIconImageEdges
+        nextButton.addTarget(self, action: #selector(done), for: .touchUpInside)
+        buttonView.addSubview(nextButton)
+        navigationItem.rightBarButtonItem = .init(customView: buttonView)
+        
+    }
+    
+    fileprivate func setupLeftBarButton() {
+        let backButton = UIButton(frame: CGRect(x: -20, y: -10, width: 20, height: 40))
+        backButton.setImage(YPConfig.icons.backButtonIcon, for: .normal)
+        backButton.contentMode = .left
+        backButton.imageEdgeInsets = YPConfig.icons.backButtonIconImageEdges
+        let backButtonItem = UIBarButtonItem(customView: backButton)
+        backButton.addTarget(self, action: #selector(close), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = backButtonItem
     }
     
     @objc
@@ -368,14 +405,5 @@ extension YPPickerVC: YPLibraryViewDelegate {
         self.dismiss(animated: true) {
             self.imagePickerDelegate?.noPhotos()
         }
-    }
-    
-    public func setRightBarButton(_ button: UIButton) {
-        let buttonView = UIView(frame: .init(x: 0, y: 0, width: 56, height: 56))
-        button.addTarget(self, action: #selector(done), for: .touchUpInside)
-        buttonView.addSubview(button)
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: buttonView)
-        navigationItem.rightBarButtonItem?.isEnabled = libraryVC!.selection.count >= YPConfig.library.minNumberOfItems
     }
 }

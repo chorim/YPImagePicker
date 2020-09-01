@@ -13,7 +13,13 @@ public struct YPIcons {
     public var shouldChangeDefaultBackButtonIcon = false
     public var hideBackButtonTitle = true
     
+    public var useCustomNavigationButton = false
+    
     public var backButtonIcon: UIImage = imageFromBundle("yp_arrow_left")
+    
+    public var backButtonIconColor: UIColor = .ypLabel
+    
+    public var nextButtonIcon: UIImage = imageFromBundle("yp_arrow_next")
     public var arrowDownIcon: UIImage = imageFromBundle("yp_arrow_down")
     public var cropIcon: UIImage = imageFromBundle("yp_iconCrop")
     public var flashOnIcon: UIImage = imageFromBundle("yp_iconFlash_on")
@@ -27,4 +33,7 @@ public struct YPIcons {
     public var captureVideoOnImage: UIImage = imageFromBundle("yp_iconVideoCaptureRecording")
     public var playImage: UIImage = imageFromBundle("yp_play")
     public var removeImage: UIImage = imageFromBundle("yp_remove")
+    
+    public var nextButtonIconImageEdges: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
+    public var backButtonIconImageEdges: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
 }
