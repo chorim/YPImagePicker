@@ -12,9 +12,9 @@ Pod::Spec.new do |s|
   s.requires_arc     = true
   s.ios.deployment_target = "9.0"
   s.source_files = 'Source/**/*.swift'
-  s.dependency 'SteviaLayout', '~> 4.7.3'
+  s.dependency 'SteviaLayout', '~> 5.0.1'
   s.dependency 'PryntTrimmerView', '~> 4.0.0'
   s.resources    = ['Resources/*', 'Source/**/*.xib']
   s.description  = "Instagram-like image picker & filters for iOS supporting videos and albums"
-  s.swift_versions = ['3', '4.1', '4.2', '5.0', '5.1', '5.2']
+  s.swift_versions = ['3', '4.1', '4.2', '5.0', '5.1', '5.2', '5.3']
 end
